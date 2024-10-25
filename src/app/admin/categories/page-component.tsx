@@ -65,23 +65,56 @@ const CategoriesPageComponent = ({categories}: Props) => {
   })
 
   const submitCategoryHandler: SubmitHandler<CreateCategorySchema> = async (data) => {
-    const uniqueId = uuid()
 
-    const fileName = `category/category-${uniqueId}`
-    const file = new File([data.image[0]], fileName)
+    const {image, name ,intent = 'create'} = data
 
-    const formData = new FormData()
-    formData.append('file', file)
-
-    const imageUrl = await imageUploadHandler(formData)
-
-    if (imageUrl) {
-      await createCategory({imageUrl, name: data.name})
-      form.reset()
-      router.refresh()
-      setIsCreateCategoryModalOpen(false)
-      toast.success('Category created successfully')
+    const handleImageUpload = async () => {
+      const uniqueId = uuid()
+      
+      const fileName = `category/category-${uniqueId}`
+      const file = new File([data.image[0]], fileName)
+      
+      const formData = new FormData()
+      formData.append('file', file)
+      
+      return imageUploadHandler(formData)
     }
+
+    switch (intent) {
+      case 'create': {
+        const imageUrl = await handleImageUpload()
+
+        if (imageUrl) {
+          await createCategory({imageUrl, name})
+          form.reset()
+          router.refresh()
+          setIsCreateCategoryModalOpen(false)
+          toast.success('Category created successfully')
+        }
+
+        break
+      }
+      case 'update': {
+        if(image && currentCategory?.slug) {
+          const imageUrl = await handleImageUpload()
+
+          if(imageUrl) {
+            await updateCategory({
+              imageUrl,
+              name,
+              slug: currentCategory.slug,
+              intent: 'update'
+            })
+            form.reset()
+            router.refresh()
+            setIsCreateCategoryModalOpen(false)
+            toast.success('Category updated successfully!')
+          }
+        }
+      }
+    }
+ 
+    
 
   }
 
