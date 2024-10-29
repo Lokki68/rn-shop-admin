@@ -1,4 +1,3 @@
-import { title } from 'process'
 import {z} from 'zod'
 
 export const createOrUpdateProductSchema = z.object({
@@ -13,7 +12,7 @@ export const createOrUpdateProductSchema = z.object({
     )
     .transform((files: FileList | null) => (files ? Array.from(files) : [])),
   intent: z.enum(['create', 'update'], {message: 'Intent must be either create or update'}).optional(),
-  slug: z.string().min(1, {message: 'Slug is required'})
+  slug: z.string().optional()
 })
 
 export type CreateOrUpdateProductSchema = z.infer<typeof createOrUpdateProductSchema>

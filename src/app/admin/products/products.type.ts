@@ -5,13 +5,14 @@ export type ProductWithCategory = {
   title: string;
   slug: string;
   imagesUrl: string[];
-  price: number;
+  price: number | null;
   heroImage: string;
   category: Category;
   maxQuantity: number;
+  created_at: string;
 }
 
-export type ProductWithCategoriesResponse = ProductWithCategory[]
+export type ProductsWithCategoriesResponse = ProductWithCategory[]
 
 export type UpdateProductSchema = {
   slug: string;

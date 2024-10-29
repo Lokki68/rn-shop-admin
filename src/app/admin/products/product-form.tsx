@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/dialog';
 import { CreateOrUpdateProductSchema } from '@/app/admin/products/schema';
 import { Input } from '@/components/ui/input';
-import { Category } from '@/app/admin/categories/categories.type';
+import { Category } from '@/app/admin/categories/categories.types';
 import { Button } from '@/components/ui/button';
 
 type Props = {
@@ -38,13 +38,13 @@ type Props = {
 };
 
 export const ProductForm = ({
-  form,
-  onSubmit,
-  categories,
-  setIsProductModalOpen,
-  isProductModalOpen,
-  defaultValues,
-}: Props) => {
+                              form,
+                              onSubmit,
+                              categories,
+                              setIsProductModalOpen,
+                              isProductModalOpen,
+                              defaultValues,
+                            }: Props) => {
   const isSubmitting = form.formState.isSubmitting;
 
   useEffect(() => {
