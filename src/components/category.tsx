@@ -31,24 +31,27 @@ export const CategoryTableRow = ({
   category,
   setCurrentCategory,
   setIsCreateCategoryModalOpen,
+  deleteCategoryHandler
 }: {
   category: CategoryWithProducts;
   setCurrentCategory: (category: CreateCategorySchema | null) => void;
   setIsCreateCategoryModalOpen: (isOpen: boolean) => void;
+  deleteCategoryHandler: (id: number) => Promise<void>
 }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleEditClick = (category: CreateCategorySchema) => {
     setCurrentCategory({
       name: category.name,
-      // @ts-ignore
       image: new File([], ''),
+      intent: 'update',
+      slug: category.slug
     });
     setIsCreateCategoryModalOpen(true);
   };
 
-  const handleDelete = () => {
-    console.log(`Deleting category with ID: ${category.id}`);
+  const handleDelete = async () => {
+    await deleteCategoryHandler(category.id);
     setIsDeleteDialogOpen(false);
   };
 

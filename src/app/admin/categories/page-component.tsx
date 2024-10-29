@@ -111,11 +111,17 @@ const CategoriesPageComponent = ({categories}: Props) => {
             toast.success('Category updated successfully!')
           }
         }
+        break
       }
+      default:
+        console.error('Invalid intent')
     }
- 
-    
+  }
 
+  const deleteCategoryHandler = async (id: number) => {
+    await deleteCategory(id)
+    router.refresh()
+    toast.success('Category deleted successfully!')
   }
 
   return (
@@ -182,6 +188,7 @@ const CategoriesPageComponent = ({categories}: Props) => {
                     category={category}
                     setCurrentCategory={setCurrentCategory}
                     setIsCreateCategoryModalOpen={setIsCreateCategoryModalOpen}
+                    deleteCategoryHandler={deleteCategoryHandler}
                   />
                 ))
               }

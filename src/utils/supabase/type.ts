@@ -61,14 +61,14 @@ export type Database = {
         }
         Relationships: []
       }
-      products: {
+      product: {
         Row: {
           category: number
           created_at: string
           heroImage: string
           id: number
           imagesUrl: string[]
-          max_quantity: number
+          maxQuantity: number
           price: number
           slug: string
           title: string
@@ -79,7 +79,7 @@ export type Database = {
           heroImage: string
           id?: number
           imagesUrl: string[]
-          max_quantity: number
+          maxQuantity: number
           price: number
           slug: string
           title: string
@@ -90,7 +90,7 @@ export type Database = {
           heroImage?: string
           id?: number
           imagesUrl?: string[]
-          max_quantity?: number
+          maxQuantity?: number
           price?: number
           slug?: string
           title?: string

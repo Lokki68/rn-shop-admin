@@ -1,22 +1,16 @@
 
-export type Products = {
-  id: number;
-  title: string;
-  slug: string;
-  imagesUrl: string[];
-  price: number;
-  heroImage: string;
-  category: number;
-  maxQuantity: number;
-}
+import {ProductWithCategory} from "@/app/admin/products/products.type";
 
-export type CategoryWithProducts = {
+export type Category = {
   id: number
-  created_at: string
-  imageUrl: string
   name: string
   slug: string
-  products: Products[]
+  imageUrl: string
+  created_at: string
+}
+
+export type CategoryWithProducts = Category & {
+  products: ProductWithCategory[]
 }
 
 export type CategoriesWithProductsResponse = CategoryWithProducts[]
